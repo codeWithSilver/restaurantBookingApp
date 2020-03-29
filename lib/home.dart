@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:restaurantbooking/detail.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -80,69 +81,77 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Container buildItem(
+  GestureDetector buildItem(
       String title, String subTitle, String url, double rating) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 12.0),
-      padding: EdgeInsets.symmetric(horizontal: 25.0),
-      child: Column(
-        children: <Widget>[
-          Container(
-            height: 200,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(url),
-                  fit: BoxFit.cover,
-                ),
-                borderRadius: BorderRadius.only(
-                
-                  topLeft: Radius.circular(10.0),  
-                  topRight: Radius.circular(10.0),
-                )),
-          ),
-          Container(
-            padding: EdgeInsets.all(25.0),
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(10.0),
-                    bottomRight: Radius.circular(10.0)),
-                boxShadow: [
-                  BoxShadow(
-                      blurRadius: 2.0, spreadRadius: 1.0, color: Colors.grey)
-                ]),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      title,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 16.0),
+    return GestureDetector(
+      onTap: (){
+        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => DetailPage(url)));
+      },
+          child: Container(
+        margin: EdgeInsets.symmetric(vertical: 12.0),
+        padding: EdgeInsets.symmetric(horizontal: 25.0),
+        child: Column(
+          children: <Widget>[
+            Hero(
+              tag: url,
+                          child: Container(
+                height: 200,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: NetworkImage(url),
+                      fit: BoxFit.cover,
                     ),
-                    Text(
-                      subTitle,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12.0,
-                          color: Colors.grey),
-                    ),
-                  ],
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.orange,
-                  child: Text(
-                    rating.toString(),
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ],
+                    borderRadius: BorderRadius.only(
+                    
+                      topLeft: Radius.circular(10.0),  
+                      topRight: Radius.circular(10.0),
+                    )),
+              ),
             ),
-          ),
-        ],
+            Container(
+              padding: EdgeInsets.all(25.0),
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(10.0),
+                      bottomRight: Radius.circular(10.0)),
+                  boxShadow: [
+                    BoxShadow(
+                        blurRadius: 2.0, spreadRadius: 1.0, color: Colors.grey)
+                  ]),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        title,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16.0),
+                      ),
+                      Text(
+                        subTitle,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12.0,
+                            color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                  CircleAvatar(
+                    backgroundColor: Colors.orange,
+                    child: Text(
+                      rating.toString(),
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

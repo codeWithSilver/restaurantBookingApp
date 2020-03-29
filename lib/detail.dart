@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatefulWidget {
+  final String url;
+
+  DetailPage(this.url);
+
   @override
   _DetailPageState createState() => _DetailPageState();
 }
@@ -20,12 +24,14 @@ class _DetailPageState extends State<DetailPage> {
                   color: Colors.white))),
       body: Stack(
         children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(
-                    "https://images.pexels.com/photos/3676531/pexels-photo-3676531.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"),
-                fit: BoxFit.cover,
+          Hero(
+            tag: widget.url,
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(widget.url),
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
@@ -39,7 +45,9 @@ class _DetailPageState extends State<DetailPage> {
                     Icons.close,
                     color: Colors.white,
                   ),
-                  onPressed: () {}),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  }),
             ),
           ),
           buildAvatar(105.0,

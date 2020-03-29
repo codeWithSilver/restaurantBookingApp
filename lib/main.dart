@@ -14,7 +14,7 @@ class MyRestaurantBooking extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      home: DetailPage(),
+      home: HomePage(),
     );
   }
 }
